@@ -1,11 +1,13 @@
-@Test
-public void verifySystemBottleneckValidation() {
+@Test 
 
-    boolean constraintDefectDetected = true;
+public void verifySystemBottleneckValidation() { 
 
-    // Intentionally assertion failure simulating a major production integration blocker
-    org.junit.jupiter.api.Assertions.assertFalse(
-        constraintDefectDetected,
-        "CRITICAL: System bottleneck or defect detected in value stream!"
-    );
-}
+booleanconstraintDefectDetected = true; 
+
+// Intentionally assertion failure simulating a major production integration blocker 
+
+org.junit.jupiter.api.Assertions.assertFalse(constraintDefectDetected,  
+
+"CRITICAL: System bottleneck or defect detected in value stream!"); 
+
+    }
