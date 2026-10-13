@@ -3,9 +3,11 @@ name: DevOps Java CI Automation Pipeline
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
   pull_request:
-    branches: ["main"]
+    branches:
+      - main
 
 jobs:
   build-and-validate:
