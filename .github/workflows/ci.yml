@@ -36,10 +36,10 @@ jobs:
           name: production-ready-jar
           path: maven-automation-pipeline/target/*.jar
           retention-days: 5
-
-  deploy-production:
+  deploy-staging:
     needs: build-and-validate
     runs-on: ubuntu-latest
+    environment: staging
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v4
@@ -51,7 +51,7 @@ jobs:
           chmod +x "$HOME/.local/bin/docker-compose"
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
-      - name: Deploy to Production Environment
+      - name: Deploy to Staging Environment
         run: |
-          echo "CI tests passed. Deploying straight to Production automatically..."
+          echo "CI tests passed. Deploying to Staging after approval..."
           docker-compose -f maven-automation-pipeline/docker-compose.yml up -d --force-recreate
