@@ -22,22 +22,21 @@ jobs:
           cache: 'maven'
 
       - name: Compile Code Base
-        run: mvn clean compile
+        run: mvn -f maven-automation-pipeline/pom.xml clean compile
 
       - name: Run Automated Test Suites
-        run: mvn test
+        run: mvn -f maven-automation-pipeline/pom.xml test
 
       - name: Package Executable Distribution
-        run: mvn package
+        run: mvn -f maven-automation-pipeline/pom.xml package
 
       - name: Upload Build Artifact for Verification
         uses: actions/upload-artifact@v4
         with:
           name: production-ready-jar
-          path: target/*.jar
+          path: maven-automation-pipeline/target/*.jar
           retention-days: 5
 
-  
   deploy-production:
     needs: build-and-validate
     runs-on: ubuntu-latest
@@ -55,5 +54,4 @@ jobs:
       - name: Deploy to Production Environment
         run: |
           echo "CI tests passed. Deploying straight to Production automatically..."
-          docker-compose up -d --force-recreate
-
+          docker-compose -f maven-automation-pipeline/docker-compose.yml up -d --force-recreate
